@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AWS AI Marketing Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: linear-gradient(135deg, #1a0033 0%, #2d1b69 50%, #1a0033 100%); color: white; min-height: 100vh; }
+        .glass { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); }
+    </style>
+</head>
+<body class="p-10">
+    <nav class="flex justify-between items-center mb-10">
+        <h1 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">AWS AI Marketing</h1>
+        <div class="space-x-4 flex items-center">
+            <a href="/about" class="text-gray-300 hover:text-white transition">About Us</a>
+            <a href="/login" class="hover:text-pink-300">Login</a>
+            <a href="/signup" class="hover:text-pink-300">Sign Up</a>
+            <a href="/admin-login" class="px-4 py-2 rounded bg-yellow-500/20 text-yellow-400 font-bold border border-yellow-500/50 hover:bg-yellow-500/30">👑 Admin Portal</a>
+        </div>
+    </nav>
+    <div class="text-center mt-20">
+        <h2 class="text-5xl font-bold mb-6">Future of Marketing</h2>
+        <p class="text-xl text-gray-300 mb-8">Powered by Google Gemini & AWS Cloud</p>
+        <div class="flex justify-center gap-4">
+            <a href="/signup" class="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full font-bold hover:scale-105 transition">Get Started</a>
+            <a href="/about" class="px-8 py-3 glass rounded-full font-bold hover:bg-white/20 transition">Learn More</a>
+        </div>
+    </div>
+</body>
+</html>
