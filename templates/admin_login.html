@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin Portal - AWS AI Marketing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>body { background: linear-gradient(135deg, #1a0033, #3d2b00); color: white; min-height: 100vh; display:flex; align-items:center; justify-content:center; }</style>
+</head>
+<body>
+    <div class="bg-black/40 p-10 rounded-xl border border-yellow-500/30 w-96 backdrop-blur-md">
+        <h2 class="text-3xl font-bold text-yellow-400 mb-6 text-center">👑 Admin Portal</h2>
+        <input id="user" type="text" placeholder="Admin Username" class="w-full mb-4 p-3 rounded bg-white/10 border border-white/20 text-white">
+        <input id="pass" type="password" placeholder="Password" class="w-full mb-6 p-3 rounded bg-white/10 border border-white/20 text-white">
+        <button onclick="login()" class="w-full py-3 bg-gradient-to-r from-yellow-500 to-orange-500 rounded font-bold text-black">Access Dashboard</button>
+        <p id="msg" class="text-center mt-4 text-red-400"></p>
+    </div>
+    <script>
+        async function login() {
+            const res = await fetch('/admin-login', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({username: document.getElementById('user').value, password: document.getElementById('pass').value})
+            });
+            if(res.ok) window.location.href = '/admin_dashboard';
+            else document.getElementById('msg').innerText = "Invalid Credentials";
+        }
+    </script>
+</body>
+</html>
