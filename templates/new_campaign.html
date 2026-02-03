@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Campaign - AWS AI Marketing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: linear-gradient(135deg, #1a0033 0%, #2d1b69 50%, #1a0033 100%); min-height: 100vh; color: white; }
+        .glass { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
+    </style>
+</head>
+<body>
+    <nav class="glass fixed w-full top-0 z-50 border-b border-purple-400/20">
+        <div class="container mx-auto px-6 py-4">
+            <a href="/dashboard" class="text-gray-400 hover:text-white">← Back to Dashboard</a>
+        </div>
+    </nav>
+
+    <div class="min-h-screen flex items-center justify-center px-4 pt-16">
+        <div class="glass p-8 rounded-xl w-full max-w-2xl">
+            <h2 class="text-3xl font-bold mb-6 flex justify-between items-center">
+                🚀 Launch Campaign
+                <span id="loading" class="text-sm font-normal text-yellow-400 hidden">🤖 AI Thinking...</span>
+            </h2>
+            
+            <div class="space-y-6">
+                <div class="flex gap-4 items-end">
+                    <div class="flex-grow">
+                        <label class="block text-sm text-gray-300 mb-2">Campaign/Product Name</label>
+                        <input type="text" id="cName" class="w-full p-3 rounded bg-black/30 border border-white/10 focus:border-purple-400 outline-none" placeholder="e.g. Summer Sale 2024" required>
+                    </div>
+                    <button onclick="generateStrategy()" class="px-4 py-3 bg-purple-600 hover:bg-purple-500 rounded font-bold transition whitespace-nowrap">
+                        ✨ AI Auto-Fill
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm text-gray-300 mb-2">Suggested Budget ($)</label>
+                        <input type="number" id="cBudget" class="w-full p-3 rounded bg-black/30 border border-white/10" placeholder="0">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-300 mb-2">Target Audience</label>
+                        <input type="text" id="cAudience" class="w-full p-3 rounded bg-black/30 border border-white/10" placeholder="e.g. Gen Z">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm text-gray-300 mb-2">Strategy Description</label>
+                    <textarea id="cDesc" class="w-full p-3 rounded bg-black/30 border border-white/10 h-32" placeholder="AI will generate this..."></textarea>
+                </div>
+
+                <button onclick="saveCampaign()" class="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg font-bold hover:scale-105 transition">
+                    Launch Campaign
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function generateStrategy() {
+            const name = document.getElementById('cName').value;
+            if(!name) return alert("Enter a campaign name first!");
+            
+            const load = document.getElementById('loading');
+            load.classList.remove('hidden');
+
+            // Call Backend AI
+            try {
+                const res = await fetch('/api/generate_campaign_idea', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ name: name })
+                });
+                const data = await res.json();
+                
+                document.getElementById('cBudget').value = data.budget || 5000;
+                document.getElementById('cAudience').value = data.audience || "General Public";
+                document.getElementById('cDesc').value = data.description || "Strategy generated.";
+            } catch(e) {
+                alert("AI Failed, using manual mode.");
+            } finally {
+                load.classList.add('hidden');
+            }
+        }
+
+        async function saveCampaign() {
+            const campaign = {
+                name: document.getElementById('cName').value,
+                budget: document.getElementById('cBudget').value,
+                audience: document.getElementById('cAudience').value,
+                description: document.getElementById('cDesc').value
+            };
+
+            if(!campaign.name) return alert("Name is required!");
+
+            // Save to Backend
+            await fetch('/api/save_campaign', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(campaign)
+            });
+
+            alert("Campaign Launched Successfully!");
+            window.location.href = '/campaign_history'; // Redirect to history
+        }
+    </script>
+</body>
+</html>
