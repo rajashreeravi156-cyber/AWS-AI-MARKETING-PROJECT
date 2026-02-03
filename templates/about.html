@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us - AWS AI Marketing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: linear-gradient(135deg, #1a0033 0%, #2d1b69 50%, #1a0033 100%); min-height: 100vh; color: white; }
+        .glass { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
+    </style>
+</head>
+<body>
+    <nav class="glass fixed w-full top-0 z-50 border-b border-purple-400/20">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">AWS AI Marketing</h1>
+            <div class="space-x-4">
+                <a href="/" class="hover:text-pink-300">Home</a>
+                <a href="/login" class="hover:text-pink-300">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-6 pt-32">
+        <h1 class="text-5xl font-bold mb-8 text-center">About Our Platform</h1>
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="glass p-8 rounded-xl">
+                <h2 class="text-2xl font-bold text-pink-400 mb-4">Our Mission</h2>
+                <p class="text-gray-300 leading-relaxed">
+                    We empower businesses to leverage the power of **AWS Cloud** and **Google Gemini AI** to create hyper-personalized marketing campaigns. Our goal is to make enterprise-grade AI tools accessible to everyone.
+                </p>
+            </div>
+            <div class="glass p-8 rounded-xl">
+                <h2 class="text-2xl font-bold text-purple-400 mb-4">Technology Stack</h2>
+                <ul class="list-disc pl-5 text-gray-300 space-y-2">
+                    <li>**AWS DynamoDB:** High-performance NoSQL database.</li>
+                    <li>**AWS SNS:** Real-time SMS and notification service.</li>
+                    <li>**Google Gemini:** Generative AI for content creation.</li>
+                    <li>**Python Flask:** Robust backend framework.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
